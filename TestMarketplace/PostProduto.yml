@@ -1,0 +1,18 @@
+info:
+  name: PostProduto
+  type: http
+
+http:
+  method: POST
+  url: http://localhost:8080/api/produtos?nome=Camisola
+  params:
+    - name: nome
+      value: Camisola
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

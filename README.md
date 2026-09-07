@@ -5,7 +5,7 @@ Plataforma onde utilizadores podem vender e comprar produtos usados/novos, com s
  
 ## Main Entities (Data Base)
 - **Utilizadores:** id, nome, contacto, localização (cidade/país), tipo (compradores/vendedores)
-- **Produtos:** id, nome, preço, categoria, stock, peso, vendedor
+- **Produtos:** id, nome, preço, categoria, stock, vendedor
 - **Encomendas:** id, produtos, comprador, estado (pendente/enviado/entregue), preço total
  
 ## Main Business Rules

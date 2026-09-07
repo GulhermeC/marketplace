@@ -1,0 +1,5 @@
+marketplace\model\Produto.class
+marketplace\config\AppPath.class
+marketplace\repository\ProdutoRepository.class
+marketplace\service\ProdutoService.class
+marketplace\controller\ProdutoController.class
