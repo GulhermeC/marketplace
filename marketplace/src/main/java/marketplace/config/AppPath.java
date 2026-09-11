@@ -5,6 +5,7 @@ import jakarta.ws.rs.core.Application;
 
 import marketplace.controller.ProdutoController;
 import marketplace.controller.UtilizadorController;
+import marketplace.controller.EncomendaController;
 
 import java.util.Set;
 
@@ -12,6 +13,6 @@ import java.util.Set;
 public class AppPath extends Application{
     @Override
     public Set<Class<?>> getClasses() {
-        return Set.of(ProdutoController.class, UtilizadorController.class);
+        return Set.of(ProdutoController.class, UtilizadorController.class, EncomendaController.class);
     }
 }
