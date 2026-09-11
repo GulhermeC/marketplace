@@ -21,10 +21,6 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String nome) {
-        this.nome = nome;
-    }
-
     public Produto(String nome, float preco, String categoria, int stock) {
         this.nome = nome;
         this.preco = preco;

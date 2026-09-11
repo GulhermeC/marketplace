@@ -1,6 +1,7 @@
 info:
-  name: update
+  name: updateProduto
   type: http
+  seq: 1
 
 http:
   method: PUT

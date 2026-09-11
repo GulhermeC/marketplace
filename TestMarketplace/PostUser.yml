@@ -1,0 +1,33 @@
+info:
+  name: PostUser
+  type: http
+
+http:
+  method: POST
+  url: http://localhost:8080/api/utilizadores?nome=Ze&password=123&email=Zemail@gmail.com&numTele=123456789&local=Lisboa&tipo=Vendedor
+  params:
+    - name: nome
+      value: Ze
+      type: query
+    - name: password
+      value: "123"
+      type: query
+    - name: email
+      value: Zemail@gmail.com
+      type: query
+    - name: numTele
+      value: "123456789"
+      type: query
+    - name: local
+      value: Lisboa
+      type: query
+    - name: tipo
+      value: Vendedor
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

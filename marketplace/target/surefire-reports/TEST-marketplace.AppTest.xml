@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="marketplace.AppTest" time="0.041" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="marketplace.AppTest" time="0.037" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\gjscr\AppData\Local\Temp\surefire15335444779029940417\surefirebooter1036486792497048195.jar C:\Users\gjscr\AppData\Local\Temp\surefire15335444779029940417 2026-09-11T11-22-25_108-jvmRun1 surefire3896545006100018479tmp surefire_03172399918085086705tmp"/>
+    <property name="sun.java.command" value="C:\Users\gjscr\AppData\Local\Temp\surefire10816337483766820572\surefirebooter11983100926025886254.jar C:\Users\gjscr\AppData\Local\Temp\surefire10816337483766820572 2026-09-11T13-34-48_933-jvmRun1 surefire14208370638151132684tmp surefire_06854128855473590312tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\gjscr\OneDrive\Área de Trabalho\Code\Java_form\Proj_5425\marketplace\marketplace\target\test-classes;C:\Users\gjscr\OneDrive\Área de Trabalho\Code\Java_form\Proj_5425\marketplace\marketplace\target\classes;C:\Users\gjscr\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\gjscr\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\gjscr\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.21.5\jackson-databind-2.21.5.jar;C:\Users\gjscr\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.21\jackson-annotations-2.21.jar;C:\Users\gjscr\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.21.5\jackson-core-2.21.5.jar;C:\Users\gjscr\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.1.0\jakarta.servlet-api-6.1.0.jar;C:\Users\gjscr\.m2\repository\jakarta\ws\rs\jakarta.ws.rs-api\3.1.0\jakarta.ws.rs-api-3.1.0.jar;C:\Users\gjscr\.m2\repository\jakarta\enterprise\jakarta.enterprise.cdi-api\4.1.0\jakarta.enterprise.cdi-api-4.1.0.jar;C:\Users\gjscr\.m2\repository\jakarta\enterprise\jakarta.enterprise.lang-model\4.1.0\jakarta.enterprise.lang-model-4.1.0.jar;C:\Users\gjscr\.m2\repository\jakarta\annotation\jakarta.annotation-api\3.0.0\jakarta.annotation-api-3.0.0.jar;C:\Users\gjscr\.m2\repository\jakarta\el\jakarta.el-api\6.0.0\jakarta.el-api-6.0.0.jar;C:\Users\gjscr\.m2\repository\jakarta\interceptor\jakarta.interceptor-api\2.2.0\jakarta.interceptor-api-2.2.0.jar;C:\Users\gjscr\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\gjscr\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.0.0\jakarta.persistence-api-3.0.0.jar;C:\Users\gjscr\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.0\jakarta.transaction-api-2.0.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\gjscr\AppData\Local\Temp\surefire15335444779029940417\surefirebooter1036486792497048195.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\gjscr\AppData\Local\Temp\surefire10816337483766820572\surefirebooter11983100926025886254.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.1+12-LTS-29"/>
