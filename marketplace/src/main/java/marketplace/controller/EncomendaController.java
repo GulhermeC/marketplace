@@ -32,11 +32,12 @@ public class EncomendaController {
     @POST 
     public Response create(
         @QueryParam ("estado") String estado,
-        @QueryParam ("preco_total") int preco_total,
-        @QueryParam ("idComprador") int idComprador
+        @QueryParam ("preco_total") float preco_total,
+        @QueryParam ("idComprador") int idComprador,
+        @QueryParam("idProduto") List<Integer> idProdutos
     )
     {
-        Encomenda encomenda = encomendaService.create(estado, preco_total, idComprador);
+        Encomenda encomenda = encomendaService.create(estado, preco_total, idComprador, idProdutos);
 
         if (encomenda == null)
         {
@@ -50,7 +51,7 @@ public class EncomendaController {
     public Response update(
         @PathParam("id") int id,
         @QueryParam ("estado") String estado,
-        @QueryParam ("preco_total") int preco_total
+        @QueryParam ("preco_total") float preco_total
     )
     {
         Encomenda encomenda = encomendaService.update(id, estado, preco_total);

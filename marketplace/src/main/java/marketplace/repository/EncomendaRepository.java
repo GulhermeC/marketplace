@@ -24,7 +24,7 @@ public class EncomendaRepository {
         em.persist(encomenda);
     }
 
-    public Encomenda update(int id, String estado, int preco_total) {
+    public Encomenda update(int id, String estado, float preco_total) {
         Encomenda existente = em.find(Encomenda.class, id);
         if (existente == null) return null;
 

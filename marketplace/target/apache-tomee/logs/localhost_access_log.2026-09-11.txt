@@ -1,5 +1,0 @@
-127.0.0.1 - - [11/Sep/2026:14:09:51 +0100] "POST /api/utilizadores?nome=Ze&password=123&email=Zemail%40gmail.com&numTele=123456789&local=Lisboa&tipo=Vendedor HTTP/1.1" 201 130
-127.0.0.1 - - [11/Sep/2026:14:10:22 +0100] "POST /api/produtos?nome=Camisola&preco=19.99&stock=10&categoria=roupa&idVendedor=1 HTTP/1.1" 201 213
-127.0.0.1 - - [11/Sep/2026:14:10:37 +0100] "GET /api/produtos HTTP/1.1" 200 215
-127.0.0.1 - - [11/Sep/2026:14:10:43 +0100] "PUT /api/utilizadores/1?nome=Ze2&password=123789&email=Zemail%40gmail.com&numTele=123456789&local=Lisboa&tipo=Vendedor HTTP/1.1" 200 134
-127.0.0.1 - - [11/Sep/2026:14:10:49 +0100] "GET /api/produtos HTTP/1.1" 200 219

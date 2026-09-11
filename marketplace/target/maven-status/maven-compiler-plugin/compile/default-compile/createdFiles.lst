@@ -1,10 +1,13 @@
-marketplace\model\Utilizador.class
-marketplace\config\AppPath.class
 marketplace\controller\UtilizadorController.class
 marketplace\repository\ProdutoRepository.class
-marketplace\service\ProdutoService.class
 marketplace\controller\ProdutoController.class
+marketplace\repository\EncomendaRepository.class
+marketplace\controller\EncomendaController.class
+marketplace\model\Utilizador.class
+marketplace\config\AppPath.class
+marketplace\service\ProdutoService.class
 marketplace\model\Produto.class
+marketplace\service\EncomendaService.class
 marketplace\service\UtilizadorService.class
 marketplace\repository\UtilizadorRepository.class
 marketplace\model\Encomenda.class

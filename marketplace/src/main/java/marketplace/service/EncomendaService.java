@@ -1,10 +1,11 @@
 package marketplace.service;
 
 import marketplace.model.Encomenda;
+import marketplace.model.Produto;
 import marketplace.model.Utilizador;
 import marketplace.repository.EncomendaRepository;
-import marketplace.repository.ProdutoRepository;
 import marketplace.repository.UtilizadorRepository;
+import marketplace.repository.ProdutoRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -19,6 +20,9 @@ public class EncomendaService {
     @Inject
     private UtilizadorRepository utilizadorRepository;
 
+    @Inject 
+    private ProdutoRepository produtoRepository;
+
     public List<Encomenda> getAll() {
         return encomendaRepository.getAll();
     }
@@ -28,7 +32,7 @@ public class EncomendaService {
     }
 
     @Transactional 
-    public Encomenda create(String estado, int preco_total, int idComprador)
+    public Encomenda create(String estado, float preco_total, int idComprador, List<Integer> idProdutos)
     {
         Utilizador comprador = utilizadorRepository.getById(idComprador);
         if (comprador == null) return null;
@@ -37,12 +41,23 @@ public class EncomendaService {
         encomenda.setEstado(estado);
         encomenda.setPreco_total(preco_total);
         encomenda.setComprador(comprador);
+
+        for (Integer idProduto : idProdutos) {
+            Produto produto = produtoRepository.getById(idProduto);
+
+            if (produto == null) {
+                return null;
+            }
+
+            encomenda.getProdutos().add(produto);
+        }
+
         encomendaRepository.create(encomenda);
         return encomenda;
     }
 
     @Transactional 
-    public Encomenda update(int id, String estado, int preco_total)
+    public Encomenda update(int id, String estado, float preco_total)
     {
         return encomendaRepository.update(id, estado, preco_total);
     }
