@@ -1,0 +1,7 @@
+127.0.0.1 - - [11/Sep/2026:11:23:31 +0100] "PUT /api/produtos/1?nome=Camisola%20Azul&preco=24.99&stock=5&categoria=roupa HTTP/1.1" 404 -
+127.0.0.1 - - [11/Sep/2026:11:23:45 +0100] "POST /api/produtos?nome=Camisola&preco=19.99&stock=10&categoria=roupa HTTP/1.1" 201 82
+127.0.0.1 - - [11/Sep/2026:11:23:45 +0100] "POST /api/produtos?nome=Camisola&preco=19.99&stock=10&categoria=roupa HTTP/1.1" 201 82
+127.0.0.1 - - [11/Sep/2026:11:23:48 +0100] "PUT /api/produtos/1?nome=Camisola%20Azul&preco=24.99&stock=5&categoria=roupa HTTP/1.1" 200 86
+127.0.0.1 - - [11/Sep/2026:11:23:53 +0100] "GET /api/produtos HTTP/1.1" 200 160
+127.0.0.1 - - [11/Sep/2026:11:24:57 +0100] "DELETE /api/produtos/1 HTTP/1.1" 204 -
+127.0.0.1 - - [11/Sep/2026:11:24:59 +0100] "GET /api/produtos HTTP/1.1" 200 84

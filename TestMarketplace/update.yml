@@ -1,20 +1,19 @@
 info:
-  name: PostProduto
+  name: update
   type: http
-  seq: 1
 
 http:
-  method: POST
-  url: http://localhost:8080/api/produtos?nome=Camisola&preco=19.99&stock=10&categoria=roupa
+  method: PUT
+  url: http://localhost:8080/api/produtos/1?nome=Camisola Azul&preco=24.99&stock=5&categoria=roupa
   params:
     - name: nome
-      value: Camisola
+      value: Camisola Azul
       type: query
     - name: preco
-      value: "19.99"
+      value: "24.99"
       type: query
     - name: stock
-      value: "10"
+      value: "5"
       type: query
     - name: categoria
       value: roupa
