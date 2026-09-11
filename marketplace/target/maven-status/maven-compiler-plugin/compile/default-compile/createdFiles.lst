@@ -7,3 +7,4 @@ marketplace\controller\ProdutoController.class
 marketplace\model\Produto.class
 marketplace\service\UtilizadorService.class
 marketplace\repository\UtilizadorRepository.class
+marketplace\model\Encomenda.class

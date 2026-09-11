@@ -1,7 +1,9 @@
 package marketplace.service;
 
 import marketplace.model.Produto;
+import marketplace.model.Utilizador;
 import marketplace.repository.ProdutoRepository;
+import marketplace.repository.UtilizadorRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -13,6 +15,9 @@ public class ProdutoService {
     @Inject
     private ProdutoRepository produtoRepository;
 
+    @Inject 
+    private UtilizadorRepository utilizadorRepository;
+
     public List<Produto> getAll() {
         return produtoRepository.getAll();
     }
@@ -22,12 +27,17 @@ public class ProdutoService {
     }
 
     @Transactional
-    public Produto create(String nome, float preco, int stock, String categoria) {
+    public Produto create(String nome, float preco, int stock, String categoria, int idVendedor) {
+
+        Utilizador vendedor = utilizadorRepository.getById(idVendedor);
+        if (vendedor == null) return null;
+
         Produto produto = new Produto();
         produto.setNome(nome);
         produto.setPreco(preco);
         produto.setStock(stock);
         produto.setCategoria(categoria);
+        produto.setVendedor(vendedor);
         produtoRepository.create(produto);
         return produto;
     }

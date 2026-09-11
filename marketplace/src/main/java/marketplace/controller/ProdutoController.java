@@ -34,10 +34,15 @@ public class ProdutoController {
         @QueryParam("nome") String nome,
         @QueryParam("preco") float preco,
         @QueryParam("stock") int stock,
-        @QueryParam("categoria") String categoria
+        @QueryParam("categoria") String categoria,
+        @QueryParam("idVendedor") int idVendedor
     )
     {
-        Produto produto = produtoService.create(nome, preco, stock, categoria);
+        Produto produto = produtoService.create(nome, preco, stock, categoria, idVendedor);
+
+        if (produto == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         return Response.status(Response.Status.CREATED).entity(produto).build();
     }
 
