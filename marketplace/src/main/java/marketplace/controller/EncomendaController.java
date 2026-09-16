@@ -4,6 +4,7 @@ import marketplace.service.EncomendaService;
 import marketplace.model.Encomenda;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.List;
@@ -13,13 +14,15 @@ public class EncomendaController {
     @Inject
     private EncomendaService encomendaService;
 
-    @GET 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
         List<Encomenda> encomendas = encomendaService.getAll();
         return Response.ok(encomendas).build();
     }
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response getById(@PathParam("id") int id) {
         Encomenda encomenda = encomendaService.getById(id);
@@ -29,7 +32,8 @@ public class EncomendaController {
         return Response.ok(encomenda).build();
     }
 
-    @POST 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
     public Response create(
         @QueryParam ("estado") String estado,
         @QueryParam ("idComprador") int idComprador,
@@ -46,6 +50,7 @@ public class EncomendaController {
     }
 
     @PUT
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response update(
         @PathParam("id") int id,

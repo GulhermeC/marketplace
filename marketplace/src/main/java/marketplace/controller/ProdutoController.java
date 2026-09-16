@@ -5,6 +5,7 @@ import marketplace.service.ProdutoService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.MediaType;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class ProdutoController {
     private ProdutoService produtoService;
     
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
         List<Produto> produtos = produtoService.getAll();
         return Response.ok(produtos).build();
@@ -21,6 +23,7 @@ public class ProdutoController {
 
     @GET
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") int id) {
         Produto produto = produtoService.getById(id);
         if (produto == null) {
@@ -30,6 +33,7 @@ public class ProdutoController {
     }
 
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     public Response create(
         @QueryParam("nome") String nome,
         @QueryParam("preco") float preco,
@@ -48,6 +52,7 @@ public class ProdutoController {
 
     @PUT
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response update(
         @PathParam("id") int id,
         @QueryParam("nome") String nome,

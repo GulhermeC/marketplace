@@ -4,6 +4,7 @@ import marketplace.model.Utilizador;
 import marketplace.service.UtilizadorService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.List;
@@ -13,13 +14,15 @@ public class UtilizadorController {
     @Inject 
     private UtilizadorService utilizadorService;
 
-    @GET 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
         List<Utilizador> utilizadores = utilizadorService.getAll();
         return Response.ok(utilizadores).build();
     }
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response getById(@PathParam("id") int id) {
         Utilizador utilizador = utilizadorService.getById(id);
@@ -30,6 +33,7 @@ public class UtilizadorController {
     }
 
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     public Response create(
         @QueryParam("nome") String nome,
         @QueryParam("password") String password,
@@ -45,6 +49,7 @@ public class UtilizadorController {
 
     @PUT
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response update(
         @PathParam("id") int id,
         @QueryParam("nome") String nome,
