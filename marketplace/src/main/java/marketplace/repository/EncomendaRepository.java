@@ -24,12 +24,11 @@ public class EncomendaRepository {
         em.persist(encomenda);
     }
 
-    public Encomenda update(int id, String estado, float preco_total) {
+    public Encomenda update(int id, String estado) {
         Encomenda existente = em.find(Encomenda.class, id);
         if (existente == null) return null;
 
         existente.setEstado(estado);
-        existente.setPreco_total(preco_total);
 
         return existente;
     }

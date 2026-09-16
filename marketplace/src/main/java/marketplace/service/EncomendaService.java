@@ -32,15 +32,16 @@ public class EncomendaService {
     }
 
     @Transactional 
-    public Encomenda create(String estado, float preco_total, int idComprador, List<Integer> idProdutos)
+    public Encomenda create(String estado, int idComprador, List<Integer> idProdutos)
     {
         Utilizador comprador = utilizadorRepository.getById(idComprador);
         if (comprador == null) return null;
 
         Encomenda encomenda = new Encomenda();
         encomenda.setEstado(estado);
-        encomenda.setPreco_total(preco_total);
         encomenda.setComprador(comprador);
+
+        float preco_total = 0;
 
         for (Integer idProduto : idProdutos) {
             Produto produto = produtoRepository.getById(idProduto);
@@ -50,16 +51,20 @@ public class EncomendaService {
             }
 
             encomenda.getProdutos().add(produto);
+
+            preco_total += produto.getPreco();
         }
+
+        encomenda.setPreco_total(preco_total);
 
         encomendaRepository.create(encomenda);
         return encomenda;
     }
 
     @Transactional 
-    public Encomenda update(int id, String estado, float preco_total)
+    public Encomenda update(int id, String estado)
     {
-        return encomendaRepository.update(id, estado, preco_total);
+        return encomendaRepository.update(id, estado);
     }
 
     @Transactional 

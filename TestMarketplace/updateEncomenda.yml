@@ -1,0 +1,19 @@
+info:
+  name: updateEncomenda
+  type: http
+  seq: 1
+
+http:
+  method: PUT
+  url: http://localhost:8080/api/encomendas/1?estado=Em processamento
+  params:
+    - name: estado
+      value: Em processamento
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,16 +1,14 @@
 info:
   name: PostEncomenda
   type: http
+  seq: 1
 
 http:
   method: POST
-  url: http://localhost:8080/api/encomendas?estado=Pendente&preco_total=40&idComprador=1&idProduto=1&idProduto=3
+  url: http://localhost:8080/api/encomendas?estado=Pendente&idComprador=1&idProduto=1&idProduto=3
   params:
     - name: estado
       value: Pendente
-      type: query
-    - name: preco_total
-      value: "40"
       type: query
     - name: idComprador
       value: "1"

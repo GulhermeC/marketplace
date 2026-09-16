@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity 
@@ -20,7 +20,7 @@ public class Produto {
     private String categoria;
     private int stock;
 
-    @OneToOne 
+    @ManyToOne 
     @JoinColumn(name = "id_vendedor")
     private Utilizador vendedor;
 

@@ -18,7 +18,10 @@ public class Encomenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    // Pendente, Em processamento, Enviada, Entregue, Cancelada
     private String estado;
+    
     private float preco_total;
 
     @ManyToOne 

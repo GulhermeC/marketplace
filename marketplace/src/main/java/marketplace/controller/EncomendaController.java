@@ -32,12 +32,11 @@ public class EncomendaController {
     @POST 
     public Response create(
         @QueryParam ("estado") String estado,
-        @QueryParam ("preco_total") float preco_total,
         @QueryParam ("idComprador") int idComprador,
         @QueryParam("idProduto") List<Integer> idProdutos
     )
     {
-        Encomenda encomenda = encomendaService.create(estado, preco_total, idComprador, idProdutos);
+        Encomenda encomenda = encomendaService.create(estado, idComprador, idProdutos);
 
         if (encomenda == null)
         {
@@ -50,11 +49,10 @@ public class EncomendaController {
     @Path("/{id}")
     public Response update(
         @PathParam("id") int id,
-        @QueryParam ("estado") String estado,
-        @QueryParam ("preco_total") float preco_total
+        @QueryParam ("estado") String estado
     )
     {
-        Encomenda encomenda = encomendaService.update(id, estado, preco_total);
+        Encomenda encomenda = encomendaService.update(id, estado);
         if (encomenda == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
