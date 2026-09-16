@@ -6,7 +6,7 @@
  
     <persistence-unit name="testPU" transaction-type="JTA">
         <!-- Diz ao TomEE para usar a Base de Dados interna pré-configurada -->
-        <jta-data-source>Default JDBC Database</jta-data-source>
+        <jta-data-source>MarketplaceDS</jta-data-source>
  
         <properties>
             <!-- Isto diz ao JPA para criar as tabelas sozinho ao arrancar! -->

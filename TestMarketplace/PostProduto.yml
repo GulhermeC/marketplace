@@ -5,13 +5,13 @@ info:
 
 http:
   method: POST
-  url: http://localhost:8080/api/produtos?nome=Camisola&preco=19.99&stock=10&categoria=roupa&idVendedor=1
+  url: http://localhost:8080/api/produtos?nome=Camisola&preco=59.99&stock=10&categoria=roupa&idVendedor=1
   params:
     - name: nome
       value: Camisola
       type: query
     - name: preco
-      value: "19.99"
+      value: "59.99"
       type: query
     - name: stock
       value: "10"
@@ -29,4 +29,3 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
-​
