@@ -35,6 +35,10 @@ function displayProducts(products) {
             <p class="stock">Stock: ${product.stock}</p>
         `;
 
+        card.addEventListener("click", function() {
+            window.location.href = `product.html?id=${product.id}`;
+        });
+
         container.appendChild(card);
     })
 }
