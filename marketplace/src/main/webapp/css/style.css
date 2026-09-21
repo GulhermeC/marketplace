@@ -118,6 +118,8 @@ body {
     padding: 20px;
 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+    transition: filter 0.2s ease, transform 0.2s ease;
 }
 
 .product-card h3 {
@@ -138,4 +140,40 @@ body {
 .product-card .stock {
     font-size: 14px;
     color: #777;
+}
+
+.product-card:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+}
+
+.add-product-button {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f28c28;
+    color: white;
+
+    border-radius: 50%;
+    text-decoration: none;
+
+    font-size: 36px;
+    font-weight: 300;
+    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.add-product-button:hover {
+    background-color: #d97706;
+    transform: scale(1.08);
 }
