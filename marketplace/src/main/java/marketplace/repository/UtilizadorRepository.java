@@ -20,6 +20,17 @@ public class UtilizadorRepository {
         return em.find(Utilizador.class, id);
     }
 
+    public Utilizador getByEmail(String email) {
+        return em.createQuery(
+            "select u from Utilizador u where u.email = :email",
+            Utilizador.class
+        )
+        .setParameter("email", email)
+        .getResultStream()
+        .findFirst()
+        .orElse(null);
+    }
+
     public void create(Utilizador utilizador) {
         em.persist(utilizador);
     }

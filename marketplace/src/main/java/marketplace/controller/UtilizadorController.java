@@ -76,4 +76,20 @@ public class UtilizadorController {
         }
         return Response.noContent().build();
     }
+
+    @GET
+    @Path("/login")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login(
+        @QueryParam("email") String email,
+        @QueryParam("password") String password
+    ) {
+        Utilizador utilizador = utilizadorService.login(email, password);
+
+        if (utilizador == null) {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+
+        return Response.ok(utilizador).build();
+    }
 }

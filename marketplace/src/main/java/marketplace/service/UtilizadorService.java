@@ -43,4 +43,18 @@ public class UtilizadorService {
     public boolean delete(int id) {
         return utilizadorRepository.delete(id);
     }
+
+    public Utilizador login(String email, String password) {
+        Utilizador utilizador = utilizadorRepository.getByEmail(email);
+
+        if (utilizador == null) {
+            return null;
+        }
+
+        if (!utilizador.getPassword().equals(password)) {
+            return null;
+        }
+
+        return utilizador;
+    }
 }
