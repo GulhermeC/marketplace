@@ -1,6 +1,10 @@
 // wait until page is loaded
 document.addEventListener("DOMContentLoaded", loadProducts);
 
+let allProducts = [];
+
+// load all produtos
+
 async function loadProducts() {
     try {
         const response = await fetch("/api/produtos");
@@ -11,6 +15,8 @@ async function loadProducts() {
         }
 
         const products = await response.json();
+
+        allProducts = products;
 
         displayProducts(products);
     } catch (error) {
@@ -43,6 +49,8 @@ function displayProducts(products) {
     })
 }
 
+// login
+
 const utilizador = localStorage.getItem("utilizador");
 const addProductButton = document.getElementById("addProductButton");
 const loginLink = document.getElementById("loginLink");
@@ -60,4 +68,35 @@ if (!utilizador) {
 
         window.location.href = "index.html";
     });
+}
+
+// search
+
+const searchInput = document.getElementById("searchInput");
+const searchButton = document.getElementById("searchButton");
+
+searchButton.addEventListener("click", searchProducts);
+
+searchInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        searchProducts();
+    }
+});
+
+function searchProducts() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+
+    if (searchTerm === "") {
+        displayProducts(allProducts);
+        return;
+    }
+
+    const filteredProducts = allProducts.filter(product => {       
+        const name = product.nome.toLowerCase();
+        const category = product.categoria.toLowerCase();
+
+        return name.includes(searchTerm) || category.includes(searchTerm);
+    });
+    
+    displayProducts(filteredProducts);
 }
