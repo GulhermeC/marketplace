@@ -261,3 +261,49 @@ body {
 .form-link a:hover {
     text-decoration: underline;
 }
+
+.product-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.product-details {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.product-details h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.product-details p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.product-details .product-price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 25px;
+}
+
+.product-details button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #222;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.product-details button:hover {
+    background-color: #444;
+}
