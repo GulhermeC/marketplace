@@ -20,7 +20,12 @@ function loadCart() {
 
     cartContainer.innerHTML ="";
 
+    let total = 0;
+
     cart.forEach(item => {
+
+        total += item.preco * item.quantidade;
+
         const cartItem = document.createElement("div");
 
         cartItem.innerHTML = `
@@ -30,7 +35,13 @@ function loadCart() {
         `;
 
         cartContainer.appendChild(cartItem);
-    })
+    });
+
+    const totalElement = document.createElement("h2");
+
+    totalElement.textContent = `Total: ${total.toFixed(2)}€`;
+
+    cartContainer.appendChild(totalElement);
 }
 
 loadCart();
