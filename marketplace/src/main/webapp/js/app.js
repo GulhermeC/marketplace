@@ -49,25 +49,11 @@ function displayProducts(products) {
     })
 }
 
-// login
-
 const utilizador = localStorage.getItem("utilizador");
 const addProductButton = document.getElementById("addProductButton");
-const loginLink = document.getElementById("loginLink");
 
 if (!utilizador) {
     addProductButton.style.display = "none";
-} else {
-    loginLink.textContent = "Logout";
-    loginLink.href = "#";
-
-    loginLink.addEventListener("click", function(event) {
-        event.preventDefault();
-
-        localStorage.removeItem("utilizador");
-
-        window.location.href = "index.html";
-    });
 }
 
 // search
