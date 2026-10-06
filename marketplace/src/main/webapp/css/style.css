@@ -402,3 +402,85 @@ body {
     font-size: 18px;
     z-index: 1000;
 }
+
+.checkout-button {
+    display: block;
+    margin: 25px 0 0 auto;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    background-color: #222;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.checkout-button:hover {
+    background-color: #444;
+}
+
+.order-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.order-header h3 {
+    margin: 0;
+}
+
+.order-status {
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+}
+
+.order-lines {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.order-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.product-name {
+    margin: 0;
+    font-weight: bold;
+}
+
+.product-quantity {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.product-price {
+    margin: 0;
+    font-weight: bold;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    font-size: 16px;
+}
+
+.order-total strong {
+    font-size: 18px;
+}

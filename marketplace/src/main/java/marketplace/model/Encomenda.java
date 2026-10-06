@@ -3,6 +3,7 @@ package marketplace.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity 
 public class Encomenda {
@@ -28,13 +30,12 @@ public class Encomenda {
     @JoinColumn(name = "id_comprador", nullable = false)
     private Utilizador comprador;
 
-    @ManyToMany
-    @JoinTable (
-        name = "encomenda_produtos",
-        joinColumns = @JoinColumn(name = "id_encomenda"),
-        inverseJoinColumns = @JoinColumn(name = "id_produto")
+    @OneToMany(
+        mappedBy = "encomenda",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
     )
-    private List<Produto> produtos = new ArrayList<>();
+    private List<LinhaEncomenda> linhas = new ArrayList<>();
 
     public Encomenda() {
     }
@@ -76,12 +77,12 @@ public class Encomenda {
     public void setComprador(Utilizador comprador) {
         this.comprador = comprador;
     }
-
-    public List<Produto> getProdutos() {
-        return produtos;
+    
+    public List<LinhaEncomenda> getLinhas() {
+        return linhas;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }   
+    public void setLinhas(List<LinhaEncomenda> linhas) {
+        this.linhas = linhas;
+    }
 }

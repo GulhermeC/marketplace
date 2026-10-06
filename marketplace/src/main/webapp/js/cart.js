@@ -69,6 +69,14 @@ function loadCart() {
 
     totalElement.textContent = `Total: ${total.toFixed(2)}€`;
 
+    const checkoutButton = document.createElement("button");
+
+    checkoutButton.textContent = "Checkout";
+    checkoutButton.classList.add("checkout-button");
+
+    checkoutButton.addEventListener("click", checkout);
+    cartContainer.appendChild(checkoutButton);
+
     cartContainer.appendChild(totalElement);
 }
 
@@ -110,6 +118,60 @@ function removeFromCart(productId) {
     localStorage.setItem(cartKey, JSON.stringify(updatedCart));
 
     loadCart();
+}
+
+async function checkout() {
+    const utilizador = JSON.parse(localStorage.getItem("utilizador"));
+
+    if (!utilizador) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    const cartKey = `cart_${utilizador.id}`;
+
+    const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+    if (cart.length === 0) {
+        return;
+    }
+
+    const params = new URLSearchParams();
+
+    params.append("estado", "Pendente");
+    params.append("idComprador", utilizador.id);
+
+    cart.forEach(item => {
+
+        for (let i = 0; i < item.quantidade; i++) {
+            params.append("idProduto", item.id);
+        }
+
+    });
+
+    try {
+
+        const response = await fetch(
+            `/api/encomendas?${params.toString()}`,
+            {
+                method: "POST"
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Could not create order");
+        }
+
+        localStorage.removeItem(cartKey);
+
+        window.location.href = "orders.html";
+
+    } catch (error) {
+
+        console.error("Checkout error:", error);
+
+        alert("Could not complete the order.");
+    }
 }
 
 loadCart();

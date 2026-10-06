@@ -20,6 +20,15 @@ public class EncomendaRepository {
         return em.find(Encomenda.class, id);
     }
 
+    public List<Encomenda> getByComprador(int idComprador) {
+        return em.createQuery(
+            "select e from Encomenda e where e.comprador.id = :idComprador",
+            Encomenda.class
+        )
+        .setParameter("idComprador", idComprador)
+        .getResultList();
+    }
+
     public void create(Encomenda encomenda) {
         em.persist(encomenda);
     }
