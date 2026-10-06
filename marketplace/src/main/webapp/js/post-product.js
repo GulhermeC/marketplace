@@ -23,8 +23,7 @@ document.getElementById("postProductForm").addEventListener("submit", async func
         );
 
         if (response.ok){
-            message.textContent = "Product posted successfully!";
-
+            showMessage("Product posted successfully!");
             document.getElementById("postProductForm").reset();
         } else {
             message.textContent = "Could not post product.";
@@ -34,3 +33,18 @@ document.getElementById("postProductForm").addEventListener("submit", async func
         message.textContent = "Could not connect to the server.";
     }
 });
+
+function showMessage(message) {
+
+    const messageElement = document.createElement("div");
+
+    messageElement.classList.add("toast-message");
+
+    messageElement.textContent = message;
+
+    document.body.appendChild(messageElement);
+
+    setTimeout(() => {
+        messageElement.remove();
+    }, 2500);
+}

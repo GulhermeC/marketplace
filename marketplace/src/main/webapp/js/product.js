@@ -89,7 +89,22 @@ function addToCart(produto) {
 
     localStorage.setItem(`cart_${utilizador.id}`, JSON.stringify(cart));
 
-    alert("Product added to cart.");
+    showMessage("Product added to cart.");
+}
+
+function showMessage(message) {
+
+    const messageElement = document.createElement("div");
+
+    messageElement.classList.add("toast-message");
+
+    messageElement.textContent = message;
+
+    document.body.appendChild(messageElement);
+
+    setTimeout(() => {
+        messageElement.remove();
+    }, 2500);
 }
 
 loadProduct();

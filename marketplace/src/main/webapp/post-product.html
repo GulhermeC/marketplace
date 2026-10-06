@@ -18,23 +18,28 @@
       </nav>
     </header>
 
-    <form id="postProductForm">
-      <label for="name">Product name</label>
-      <input type="text" id="name" name="name" required />
+    <main class="form-page">
+      <div class="form-container">
+        <h1>Post Product</h1>
+        <form id="postProductForm">
+          <label for="name">Product name</label>
+          <input type="text" id="name" name="name" required />
 
-      <label for="price">Price</label>
-      <input type="number" id="price" name="price" step="0.01" required />
+          <label for="price">Price</label>
+          <input type="number" id="price" name="price" step="0.01" required />
 
-      <label for="stock">Stock</label>
-      <input type="number" id="stock" name="stock" min="1" required />
+          <label for="stock">Stock</label>
+          <input type="number" id="stock" name="stock" min="1" required />
 
-      <label for="category">Category</label>
-      <input type="text" id="category" name="category" required />
+          <label for="category">Category</label>
+          <input type="text" id="category" name="category" required />
 
-      <button type="submit">Post Product</button>
+          <button type="submit">Post Product</button>
 
-      <p id="productMessage"></p>
-    </form>
+          <p id="productMessage"></p>
+        </form>
+      </div>
+    </main>
 
     <script src="js/navbar.js"></script>
     <script src="js/post-product.js"></script>

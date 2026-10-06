@@ -389,3 +389,16 @@ body {
 .remove-button:hover {
     background-color: #444;
 }
+
+.toast-message {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 18px 25px;
+    background-color: #222;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    z-index: 1000;
+}
