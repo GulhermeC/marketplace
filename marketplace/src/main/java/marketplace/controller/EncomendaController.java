@@ -9,8 +9,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 @Path("/encomendas")
 public class EncomendaController {
