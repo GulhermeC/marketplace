@@ -1,41 +1,38 @@
 document.addEventListener("DOMContentLoaded", loadOrders);
 
 async function loadOrders() {
+  const utilizador = JSON.parse(localStorage.getItem("utilizador"));
+  const ordersContainer = document.getElementById("ordersContainer");
 
-    const utilizador = JSON.parse(localStorage.getItem("utilizador"));
-    const ordersContainer = document.getElementById("ordersContainer");
+  if (!utilizador) {
+    window.location.href = "login.html";
+    return;
+  }
 
-    if (!utilizador) {
-        window.location.href = "login.html";
-        return;
+  try {
+    const response = await fetch(`/api/encomendas/comprador/${utilizador.id}`);
+
+    if (!response.ok) {
+      throw new Error("Could not load orders");
     }
 
-    try {
-        const response = await fetch(
-            `/api/encomendas/comprador/${utilizador.id}`
-        );
+    const encomendas = await response.json();
 
-        if (!response.ok) {
-            throw new Error("Could not load orders");
-        }
+    if (encomendas.length === 0) {
+      ordersContainer.innerHTML = "<p>You have no orders yet.</p>";
+      return;
+    }
 
-        const encomendas = await response.json();
+    ordersContainer.innerHTML = "";
 
-        if (encomendas.length === 0) {
-            ordersContainer.innerHTML = "<p>You have no orders yet.</p>";
-            return;
-        }
+    encomendas.forEach((encomenda) => {
+      const orderElement = document.createElement("div");
+      orderElement.classList.add("order-card");
 
-        ordersContainer.innerHTML = "";
+      let linhasHTML = "";
 
-        encomendas.forEach(encomenda => {
-        const orderElement = document.createElement("div");
-        orderElement.classList.add("order-card");
-
-        let linhasHTML = "";
-
-        encomenda.linhas.forEach(linha => {
-            linhasHTML += `
+      encomenda.linhas.forEach((linha) => {
+        linhasHTML += `
                 <div class="order-line">
                     <div>
                         <p class="product-name">${linha.nomeProduto}</p>
@@ -47,9 +44,9 @@ async function loadOrders() {
                     </p>
                 </div>
             `;
-        });
+      });
 
-        orderElement.innerHTML = `
+      orderElement.innerHTML = `
             <div class="order-header">
                 <h3>Order #${encomenda.id}</h3>
                 <span class="order-status">${encomenda.estado}</span>
@@ -63,13 +60,76 @@ async function loadOrders() {
                 <span>Total</span>
                 <strong>${encomenda.preco_total.toFixed(2)}€</strong>
             </div>
+
+            ${
+              encomenda.estado === "Pendente"
+                ? ` 
+                <button class="pay-order-button" data-id="${encomenda.id}"> 
+                    Pay now 
+                </button> 
+            `
+                : ""
+            }
         `;
 
-        ordersContainer.appendChild(orderElement);
-    });
+      ordersContainer.appendChild(orderElement);
 
-    } catch (error) {
-        console.error("Error loading orders:", error);
-        ordersContainer.innerHTML = "<p>Could not load your orders.</p>";
-    }
+      orderElement
+        .querySelector(".pay-order-button")
+        ?.addEventListener("click", () => {
+          const paymentModal = document.getElementById("paymentModal");
+          document.getElementById("paymentOrderId").textContent =
+            `Order #${encomenda.id}`;
+          document.getElementById("paymentTotal").textContent =
+            `Total: ${encomenda.preco_total.toFixed(2)}€`;
+          paymentModal.dataset.orderId = encomenda.id;
+          paymentModal.hidden = false;
+        });
+    });
+  } catch (error) {
+    console.error("Error loading orders:", error);
+    ordersContainer.innerHTML = "<p>Could not load your orders.</p>";
+  }
 }
+
+document.getElementById("closePaymentButton").addEventListener("click", () => {
+  document.getElementById("paymentModal").hidden = true;
+});
+
+document
+  .getElementById("confirmPaymentButton")
+  .addEventListener("click", async () => {
+    const paymentModal = document.getElementById("paymentModal");
+    const orderId = paymentModal.dataset.orderId;
+    const button = document.getElementById("confirmPaymentButton");
+
+    button.disabled = true;
+    button.textContent = "Processing...";
+
+    try {
+      const response = await fetch(
+        `/api/encomendas/${orderId}?estado=${encodeURIComponent("Em processamento")}`,
+        {
+          method: "PUT",
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Could not update order status");
+      }
+
+      paymentModal.hidden = true;
+      const successMessage = document.getElementById("orderSuccessMessage");
+      successMessage.hidden = false;
+      await loadOrders();
+      setTimeout(() => {
+        successMessage.hidden = true;
+      }, 3000);
+    } catch (error) {
+      console.error("Payment simulation error:", error);
+      alert("Could not confirm the simulated payment. Please try again.");
+    } finally {
+      button.disabled = false;
+      button.textContent = "Confirm simulated payment";
+    }
+  });
