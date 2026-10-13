@@ -1,34 +1,30 @@
 const cartContainer = document.getElementById("cartContainer");
 
 function loadCart() {
+  const utilizador = JSON.parse(localStorage.getItem("utilizador"));
 
-    const utilizador = JSON.parse(localStorage.getItem("utilizador"));
+  if (!utilizador) {
+    window.location.href = "login.html";
+    return;
+  }
 
-    if (!utilizador) {
-        window.location.href = "login.html";
-        return;
-    }
+  const cart = JSON.parse(localStorage.getItem(`cart_${utilizador.id}`)) || [];
 
-    const cart = JSON.parse(
-        localStorage.getItem(`cart_${utilizador.id}`)
-    ) || [];
+  if (cart.length === 0) {
+    cartContainer.innerHTML = "<p>Cart is empty.</p>";
+    return;
+  }
 
-    if (cart.length === 0) {
-        cartContainer.innerHTML = "<p>Cart is empty.</p>";
-        return;
-    }
+  cartContainer.innerHTML = "";
 
-    cartContainer.innerHTML ="";
+  let total = 0;
 
-    let total = 0;
+  cart.forEach((item) => {
+    total += item.preco * item.quantidade;
 
-    cart.forEach(item => {
+    const cartItem = document.createElement("div");
 
-        total += item.preco * item.quantidade;
-
-        const cartItem = document.createElement("div");
-
-        cartItem.innerHTML = `
+    cartItem.innerHTML = `
             <h3>${item.nome}</h3>
 
             <p>Price: ${item.preco}€</p>
@@ -44,134 +40,137 @@ function loadCart() {
             <button class="remove-button">Remove</button>
         `;
 
-        cartItem
-            .querySelector(".decrease-button")
-            .addEventListener("click", () => {
-                changeQuantity(item.id, -1);
-            });
-
-        cartItem
-            .querySelector(".increase-button")
-            .addEventListener("click", () => {
-                changeQuantity(item.id, 1);
-            });
-
-        cartItem
-            .querySelector(".remove-button")
-            .addEventListener("click", () => {
-                removeFromCart(item.id);
-            });
-
-        cartContainer.appendChild(cartItem);
+    cartItem.querySelector(".decrease-button").addEventListener("click", () => {
+      changeQuantity(item.id, -1);
     });
 
-    const totalElement = document.createElement("h2");
+    cartItem.querySelector(".increase-button").addEventListener("click", () => {
+      changeQuantity(item.id, 1);
+    });
 
-    totalElement.textContent = `Total: ${total.toFixed(2)}€`;
+    cartItem.querySelector(".remove-button").addEventListener("click", () => {
+      removeFromCart(item.id);
+    });
 
-    const checkoutButton = document.createElement("button");
+    cartContainer.appendChild(cartItem);
+  });
 
-    checkoutButton.textContent = "Checkout";
-    checkoutButton.classList.add("checkout-button");
+  const totalElement = document.createElement("h2");
 
-    checkoutButton.addEventListener("click", checkout);
-    cartContainer.appendChild(checkoutButton);
+  totalElement.textContent = `Total: ${total.toFixed(2)}€`;
 
-    cartContainer.appendChild(totalElement);
+  const checkoutButton = document.createElement("button");
+
+  checkoutButton.textContent = "Checkout";
+  checkoutButton.classList.add("checkout-button");
+
+  checkoutButton.addEventListener("click", checkout);
+  cartContainer.appendChild(checkoutButton);
+
+  cartContainer.appendChild(totalElement);
 }
 
 function changeQuantity(productId, change) {
+  const utilizador = JSON.parse(localStorage.getItem("utilizador"));
 
-    const utilizador = JSON.parse(localStorage.getItem("utilizador"));
+  const cartKey = `cart_${utilizador.id}`;
 
-    const cartKey = `cart_${utilizador.id}`;
+  const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
-    const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+  const item = cart.find((item) => item.id === productId);
 
-    const item = cart.find(item => item.id === productId);
+  if (!item) {
+    return;
+  }
 
-    if (!item) {
-        return;
-    }
+  item.quantidade += change;
 
-    item.quantidade += change;
+  if (item.quantidade <= 0) {
+    item.quantidade = 1;
+  }
 
-    if (item.quantidade <= 0) {
-        item.quantidade = 1;
-    }
+  localStorage.setItem(cartKey, JSON.stringify(cart));
 
-    localStorage.setItem(cartKey, JSON.stringify(cart));
-
-    loadCart();
+  loadCart();
 }
 
 function removeFromCart(productId) {
+  const utilizador = JSON.parse(localStorage.getItem("utilizador"));
 
-    const utilizador = JSON.parse(localStorage.getItem("utilizador"));
+  const cartKey = `cart_${utilizador.id}`;
 
-    const cartKey = `cart_${utilizador.id}`;
+  const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
-    const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+  const updatedCart = cart.filter((item) => item.id !== productId);
 
-    const updatedCart = cart.filter(item => item.id !== productId);
+  localStorage.setItem(cartKey, JSON.stringify(updatedCart));
 
-    localStorage.setItem(cartKey, JSON.stringify(updatedCart));
-
-    loadCart();
+  loadCart();
 }
 
 async function checkout() {
-    const utilizador = JSON.parse(localStorage.getItem("utilizador"));
+  const utilizador = JSON.parse(localStorage.getItem("utilizador"));
 
-    if (!utilizador) {
-        window.location.href = "login.html";
-        return;
+  if (!utilizador) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const cartKey = `cart_${utilizador.id}`;
+
+  const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+  if (cart.length === 0) {
+    return;
+  }
+
+  const params = new URLSearchParams();
+
+  params.append("estado", "Pendente");
+  params.append("idComprador", utilizador.id);
+
+  cart.forEach((item) => {
+    for (let i = 0; i < item.quantidade; i++) {
+      params.append("idProduto", item.id);
     }
+  });
 
-    const cartKey = `cart_${utilizador.id}`;
-
-    const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
-    if (cart.length === 0) {
-        return;
-    }
-
-    const params = new URLSearchParams();
-
-    params.append("estado", "Pendente");
-    params.append("idComprador", utilizador.id);
-
-    cart.forEach(item => {
-
-        for (let i = 0; i < item.quantidade; i++) {
-            params.append("idProduto", item.id);
-        }
-
+  try {
+    const response = await fetch(`/api/encomendas?${params.toString()}`, {
+      method: "POST",
     });
 
-    try {
-
-        const response = await fetch(
-            `/api/encomendas?${params.toString()}`,
-            {
-                method: "POST"
-            }
-        );
-
-        if (!response.ok) {
-            throw new Error("Could not create order");
-        }
-
-        localStorage.removeItem(cartKey);
-
-        window.location.href = "orders.html";
-
-    } catch (error) {
-
-        console.error("Checkout error:", error);
-
-        alert("Could not complete the order.");
+    if (!response.ok) {
+      throw new Error("Could not create order");
     }
+
+    localStorage.removeItem(cartKey);
+
+    window.location.href = "orders.html";
+  } catch (error) {
+    console.error("Checkout error:", error);
+
+    document.querySelector(".checkout-error")?.remove();
+
+    const errorMessage = document.createElement("div");
+    errorMessage.classList.add("checkout-error");
+    errorMessage.innerHTML = `
+            <span class="checkout-error-icon">!</span>
+            <div>
+                <strong>Order failed</strong>
+                <p>Could not complete the order. Check product availability and try again.</p>
+            </div>
+            <button class="checkout-error-close" aria-label="Close">&times;</button>
+        `;
+
+    document.body.appendChild(errorMessage);
+
+    errorMessage
+      .querySelector(".checkout-error-close")
+      .addEventListener("click", () => errorMessage.remove());
+
+    setTimeout(() => errorMessage.remove(), 5000);
+  }
 }
 
 loadCart();
