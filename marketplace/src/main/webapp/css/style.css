@@ -485,7 +485,6 @@ body {
     font-size: 18px;
 }
 
-
 .checkout-error {
     position: fixed;
     right: 24px;
@@ -544,4 +543,11 @@ body {
     color: #777777;
     font-size: 22px;
     cursor: pointer;
+}
+
+#loginMessage {
+    margin-top: 16px;
+    color: #dc2626;
+    padding: 8px 12px;
+    font-size: 14px;
 }
