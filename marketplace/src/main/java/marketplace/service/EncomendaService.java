@@ -99,8 +99,8 @@ public class EncomendaService {
 
             Produto produto = produtoRepository.getById(entry.getKey());
 
-            if (produto == null) {
-                return null;
+            if (produto == null || produto.getStock() < entry.getValue()) { 
+                return null; 
             }
 
             LinhaEncomenda linha = new LinhaEncomenda();
@@ -108,6 +108,7 @@ public class EncomendaService {
             linha.setEncomenda(encomenda);
             linha.setProduto(produto);
             linha.setQuantidade(entry.getValue());
+            produto.setStock(produto.getStock() - entry.getValue());
             linha.setPreco(produto.getPreco());
 
             encomenda.getLinhas().add(linha);
